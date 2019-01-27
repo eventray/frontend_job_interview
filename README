@@ -1,0 +1,70 @@
+Create a static react app that contacts a RESTful interface to display
+a list of airline flights, allows the user to select one and enter
+passenger data, submits that data back to the RESTful interface, and
+displays confirmation data.  Everything should occur as a page; there
+should be no page loads after the first.
+
+This project includes a Python3 file that implements a Pyramid app which
+provides a REST interface and a JSON file containing information about
+available flights.
+
+When run, the app is served at localhost on port 5000.  Instructions for
+setting up the development environment and running the Flask app are in
+the docstring.
+
+It has these endpoints:
+
+GET /flights - returns JSON in the form:
+
+    {
+        "flights": [
+            {
+                "number": "AA1234", "airline": "Awesome Airlines",
+                "departs": {
+                    "airport": "SFO", "when": "2015-01-01T12:00:00"
+                }, "arrives": {
+                    "airport": "IAH", "when": "2014-01-01T19:00:00"
+                }, "cost": 567.89
+            }, # ...
+        ]
+    }
+
+POST /book - accepts data:
+
+    {
+        "firstname": "John",
+        "lastname": "Doe",
+        "flight_number": "AA1234",
+        "bags": 2
+    }
+
+and responds:
+
+    { "success": true, "confirmation": "ZHJ2F8" }
+
+or
+
+    { "success": false, "message": "This flight is full." }
+
+If also has validation to let you know if you passed something wrong:
+
+    {
+        "success": False,
+        "message": "You did not pass a valid request",
+        "errors": [
+            {
+                "field": "first_name",
+                "error": "is_required",
+            }
+        ]
+    }
+
+Other endpoints are allowed but not required.
+
+All times are in UTC.  All costs are in US dollars.
+
+You are responsible for the workflow and design
+
+You will be submitting a Github Repo containing HTML, JS, CSS, and additional
+resources (images, etc.).  You may (and probably should!) use any third party
+components / libraries you are comfortable with.
